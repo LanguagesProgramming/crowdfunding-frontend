@@ -103,6 +103,7 @@ class Home extends StatelessWidget {
                               },
                               campaignId: currentCampaign.campaignId,
                               userId: currentCampaign.userId,
+                              userName: currentCampaign.userName,
                               title: currentCampaign.title,
                               imageUrl: currentCampaign.imageLink,
                               goal: currentCampaign.goal,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class CampaignComponent extends StatelessWidget {
   String campaignId;
   String userId;
+  String userName;
   String title;
   String imageUrl;
   double goal;
@@ -14,6 +15,7 @@ class CampaignComponent extends StatelessWidget {
     super.key,
     required this.campaignId,
     required this.userId,
+    required this.userName,
     required this.title,
     required this.imageUrl,
     required this.goal,
@@ -35,7 +37,7 @@ class CampaignComponent extends StatelessWidget {
           Row(
             children: [
               Text(
-                'unicef',
+                userName,
                 textAlign: TextAlign.left,
               )
             ],

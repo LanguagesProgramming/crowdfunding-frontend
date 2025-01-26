@@ -36,9 +36,7 @@ class CampaignRoute extends StatelessWidget {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Text(campaign.userId),
-                      ],
+                      children: [Text(campaignViewModel.campaign.userName)],
                     ),
                     LinearProgressIndicator(
                       color: Color(0xFFC1E965),

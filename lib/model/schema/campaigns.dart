@@ -3,6 +3,7 @@ import 'package:crowdfunding_frontend/model/schema/products.dart';
 class Campaign {
   final String campaignId;
   final String userId;
+  final String userName;
   final String title;
   final String category;
   final String description;
@@ -14,6 +15,7 @@ class Campaign {
   Campaign({
     required this.campaignId,
     required this.userId,
+    required this.userName,
     required this.title,
     required this.category,
     required this.description,

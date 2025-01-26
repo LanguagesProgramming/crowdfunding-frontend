@@ -7,6 +7,7 @@ class CampaignModelLocal extends CampaignModel {
     Campaign(
         campaignId: '1',
         userId: '1',
+        userName: 'unicef',
         title: 'Ecological Medicine',
         category: 'Technology',
         description: 'A description',
@@ -23,6 +24,7 @@ class CampaignModelLocal extends CampaignModel {
     Campaign(
       campaignId: '2',
       userId: '2',
+      userName: 'Steve Madson',
       title: 'Smart Home',
       category: 'Technology',
       description: 'A description',
