@@ -9,7 +9,7 @@ class DonationController extends ChangeNotifier {
   double get amount => _donationModel.amount;
 
   void updateAmount(double newAmount) {
-    _donationModel.amount += newAmount;
+    _donationModel.amount = newAmount;
     notifyListeners();
   }
 
