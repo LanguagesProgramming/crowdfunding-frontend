@@ -1,6 +1,7 @@
 import 'package:crowdfunding_frontend/components/app_bar.dart';
 import 'package:crowdfunding_frontend/controllers/campaign_view_model.dart';
 import 'package:crowdfunding_frontend/model/schema/campaigns.dart';
+import 'package:crowdfunding_frontend/views/donate.dart';
 import 'package:flutter/material.dart';
 
 class CampaignRoute extends StatelessWidget {
@@ -96,7 +97,17 @@ class CampaignRoute extends StatelessWidget {
                 margin: EdgeInsets.all(20),
                 color: Color(0xFFC1E965),
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DonateScreen(
+                          campaignTitle: campaign.title, // Pasamos datos relevantes
+                          campaignId: campaign.campaignId, // Si tienes un ID de la campaña
+                        ),
+                      ),
+                    );
+                  },
                   child: Text('Donate Now'),
                 ),
               ),

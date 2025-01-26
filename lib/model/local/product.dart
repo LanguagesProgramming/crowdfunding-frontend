@@ -7,4 +7,10 @@ class ProductModelLocal extends ProductModel {
     // TODO: implement getProductById
     throw UnimplementedError();
   }
+  
+  @override
+  Future<List<Product>> getAllProducts() {
+    // TODO: implement getAllProducts
+    throw UnimplementedError();
+  }
 }

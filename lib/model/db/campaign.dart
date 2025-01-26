@@ -10,4 +10,16 @@ class CampaignModelDB extends CampaignModel {
   }
 
   CampaignModelDB._internal();
+  
+  @override
+  Future<List<Campaign>> getAll() {
+    // TODO: implement getAll
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<Campaign> getById(String id) {
+    // TODO: implement getById
+    throw UnimplementedError();
+  }
 }
