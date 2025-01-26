@@ -20,33 +20,32 @@ class TransactionComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image(
-          image: NetworkImage(
-            imageUrl,
-          ),
-        ),
-        Row(
+    return Container(
+      color: Color(0xFFC1E965),
+      child: Row(
           children: [
-            Text(
-              campaignName,
-              textAlign: TextAlign.left,
-            )
+            Image(
+              image: NetworkImage(
+                imageUrl,
+              ),
+            ),
+            Column(
+              children: [
+                Text(
+                  campaignName,
+                  textAlign: TextAlign.left,
+                ),
+                Text(
+                name,
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+                Text('\$$value'),
+                Text('$units units'),
+              ],
+            ),
           ],
         ),
-        Text(
-          name,
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('\$$value'),
-            Text('$units units'),
-          ],
-        ),
-      ],
     );
+    
   }
 }

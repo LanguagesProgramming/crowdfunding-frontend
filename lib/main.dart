@@ -2,6 +2,7 @@ import 'package:crowdfunding_frontend/components/app_bar.dart';
 import 'package:crowdfunding_frontend/model/local/user.dart';
 import 'package:crowdfunding_frontend/session.dart';
 import 'package:crowdfunding_frontend/views/home.dart';
+import 'package:crowdfunding_frontend/views/history.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
             children: [
               Home(),
               Icon(Icons.campaign),
-              Icon(Icons.history),
+              History(),
               Icon(Icons.person),
             ],
           ),
