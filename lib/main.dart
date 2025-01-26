@@ -1,8 +1,11 @@
 import 'package:crowdfunding_frontend/components/app_bar.dart';
+import 'package:crowdfunding_frontend/model/local/user.dart';
+import 'package:crowdfunding_frontend/session.dart';
 import 'package:crowdfunding_frontend/views/home.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  UserManager().setUser(await UserModelLocal().getUser('1'));
   runApp(const MyApp());
 }
 
