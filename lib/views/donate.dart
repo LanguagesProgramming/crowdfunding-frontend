@@ -3,7 +3,7 @@ import '../controllers/donation_view_model.dart';
 import '../model/donate_model.dart';
 
 class DonateScreen extends StatelessWidget {
-  final DonationController donationController = DonationController(DonationModel(amount: 200));
+  final DonationController donationController = DonationController(DonationModel());
 
   DonateScreen({super.key, required String campaignTitle, required campaignId});
 

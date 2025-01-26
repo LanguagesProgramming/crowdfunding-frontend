@@ -1,6 +1,6 @@
 class DonationModel {
   double amount;
 
-  DonationModel({required this.amount});
+  DonationModel({this.amount = 0.0});
 
 }
