@@ -1,7 +1,10 @@
 import 'package:crowdfunding_frontend/components/app_bar.dart';
 import 'package:crowdfunding_frontend/controllers/campaign_view_model.dart';
+import 'package:crowdfunding_frontend/controllers/summary_view_model.dart';
 import 'package:crowdfunding_frontend/model/schema/campaigns.dart';
+import 'package:crowdfunding_frontend/model/summary_model.dart';
 import 'package:crowdfunding_frontend/views/donate.dart';
+import 'package:crowdfunding_frontend/views/summary.dart';
 import 'package:flutter/material.dart';
 
 class CampaignRoute extends StatelessWidget {
@@ -91,26 +94,50 @@ class CampaignRoute extends StatelessWidget {
                 ),
               ),
               Expanded(child: SizedBox()),
-              Container(
-                padding:
-                    EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
-                margin: EdgeInsets.all(20),
-                color: Color(0xFFC1E965),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DonateScreen(
-                          campaignTitle: campaign.title, // Pasamos datos relevantes
-                          campaignId: campaign.campaignId, // Si tienes un ID de la campaña
-                        ),
-                      ),
-                    );
-                  },
-                  child: Text('Donate Now'),
-                ),
-              ),
+              Row(
+                children: [
+                  Container(
+                    padding:
+                        EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+                    margin: EdgeInsets.all(20),
+                    color: Color(0xFFC1E965),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DonateScreen(
+                              campaignTitle: campaign.title, // Pasamos datos relevantes
+                              campaignId: campaign.campaignId, // Si tienes un ID de la campaña
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text('Donate Now'),
+                    ),
+                  ),
+                  Container(
+                    padding:
+                        EdgeInsets.only(top: 10, bottom: 10, left: 40, right: 40),
+                    margin: EdgeInsets.all(20),
+                    color: Color(0xFFC1E965),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Summary(
+                              controller: CampaignSummary(SummaryModel(goalAmount: campaign.goal, raisedAmount: campaign.currentMoney))
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text('View Raised Amount'),
+                    ),
+                  )
+                ]
+              )
+              
             ],
           );
         },
