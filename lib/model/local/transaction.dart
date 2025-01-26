@@ -35,36 +35,7 @@ class TransactionModelLocal extends TransactionModel {
             imageUrl: "https://placehold.jp/150x150.png"
             ),
     ),
-    Transaction(
-        user: User(
-          userId: "user3",
-          username: "User3",
-          campaigns: ["1", "2"] 
-        ),
-        value: 155.5,
-        units: 1,
-        product: Product(
-            campaignId: "1",
-            productId: "1",
-            name: "Name1",
-            imageUrl: "https://placehold.jp/150x150.png"
-            ),
-    ),
-    Transaction(
-        user: User(
-          userId: "user4",
-          username: "User4",
-          campaigns: ["1", "2"] 
-        ),
-        value: 155.5,
-        units: 1,
-        product: Product(
-            campaignId: "1",
-            productId: "1",
-            name: "Name1",
-            imageUrl: "https://placehold.jp/150x150.png"
-            ),
-    ),
+
   ];
 
   @override

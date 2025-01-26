@@ -14,13 +14,9 @@ class History extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        Container(
-          width: screenWidth,
-          height: screenHeight,
-          child: Expanded(
+        Expanded(
             child: Center(
               child: FractionallySizedBox(
                 widthFactor: 0.8,
@@ -48,7 +44,6 @@ class History extends StatelessWidget{
               ),
             ),
           )
-        )
       ]
     );
   }
