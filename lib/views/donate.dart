@@ -1,19 +1,18 @@
+import 'package:crowdfunding_frontend/components/app_bar.dart';
+import 'package:crowdfunding_frontend/controllers/donation_view_model.dart';
+import 'package:crowdfunding_frontend/model/donate_model.dart';
 import 'package:flutter/material.dart';
-import '../controllers/donation_view_model.dart';
-import '../model/donate_model.dart';
 
-class DonateScreen extends StatelessWidget {
-  final DonationController donationController = DonationController(DonationModel());
+class DonateView extends StatelessWidget {
+  final DonationController donationController =
+      DonationController(DonationModel());
 
-  DonateScreen({super.key, required String campaignTitle, required campaignId});
+  DonateView({super.key, required String campaignTitle, required campaignId});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Campaign"),
-        backgroundColor: Colors.lightGreen,
-      ),
+      appBar: MainAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -48,9 +47,15 @@ class DonateScreen extends StatelessWidget {
                 donationController.submitDonation(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.lightGreen,
+                backgroundColor: Color(0xFFC1E965),
               ),
-              child: Text('Donate Now'),
+              child: Text(
+                'Donate Now',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+              ),
             ),
           ],
         ),
@@ -58,4 +63,3 @@ class DonateScreen extends StatelessWidget {
     );
   }
 }
-

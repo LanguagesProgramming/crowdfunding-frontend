@@ -23,29 +23,28 @@ class TransactionComponent extends StatelessWidget {
     return Container(
       color: Color(0xFFC1E965),
       child: Row(
-          children: [
-            Image(
-              image: NetworkImage(
-                imageUrl,
-              ),
+        children: [
+          Image(
+            image: NetworkImage(
+              imageUrl,
             ),
-            Column(
-              children: [
-                Text(
-                  campaignName,
-                  textAlign: TextAlign.left,
-                ),
-                Text(
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Column(
+            children: [
+              Text(
                 name,
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                ),
-                Text('\$$value'),
-                Text('$units units'),
-              ],
-            ),
-          ],
-        ),
+              ),
+              Text('\$$value'),
+              Text('$units units'),
+            ],
+          ),
+        ],
+      ),
     );
-    
   }
 }
+

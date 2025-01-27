@@ -10,7 +10,9 @@ import 'package:flutter/material.dart';
 class CampaignRoute extends StatelessWidget {
   CampaignViewModel campaignViewModel;
 
-  CampaignRoute({super.key, required this.campaignViewModel});
+  CampaignRoute({super.key, required this.campaignViewModel}) {
+    print("re run");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +44,25 @@ class CampaignRoute extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [Text(campaignViewModel.campaign.userName)],
                     ),
-                    LinearProgressIndicator(
-                      color: Color(0xFFC1E965),
-                      backgroundColor: Color(0xFF3E4B1F),
-                      minHeight: 20,
-                      value: campaign.currentMoney / campaign.goal,
-                      borderRadius: BorderRadius.all(Radius.circular(100)),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Summary(
+                                controller: CampaignSummary(SummaryModel(
+                                    goalAmount: campaign.goal,
+                                    raisedAmount: campaign.currentMoney))),
+                          ),
+                        );
+                      },
+                      child: LinearProgressIndicator(
+                        color: Color(0xFFC1E965),
+                        backgroundColor: Color(0xFF3E4B1F),
+                        minHeight: 20,
+                        value: campaign.currentMoney / campaign.goal,
+                        borderRadius: BorderRadius.all(Radius.circular(100)),
+                      ),
                     ),
                     SizedBox(
                       height: 10,
@@ -94,50 +109,32 @@ class CampaignRoute extends StatelessWidget {
                 ),
               ),
               Expanded(child: SizedBox()),
-              Row(
-                children: [
-                  Container(
-                    padding:
-                        EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
-                    margin: EdgeInsets.all(20),
-                    color: Color(0xFFC1E965),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DonateScreen(
-                              campaignTitle: campaign.title, // Pasamos datos relevantes
-                              campaignId: campaign.campaignId, // Si tienes un ID de la campaña
-                            ),
-                          ),
-                        );
-                      },
-                      child: Text('Donate Now'),
-                    ),
+              Container(
+                padding:
+                    EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+                margin:
+                    EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
+                color: Color(0xFFC1E965),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DonateView(
+                          campaignTitle:
+                              campaign.title, // Pasamos datos relevantes
+                          campaignId: campaign
+                              .campaignId, // Si tienes un ID de la campaña
+                        ),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Donate Now',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  Container(
-                    padding:
-                        EdgeInsets.only(top: 10, bottom: 10, left: 40, right: 40),
-                    margin: EdgeInsets.all(20),
-                    color: Color(0xFFC1E965),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Summary(
-                              controller: CampaignSummary(SummaryModel(goalAmount: campaign.goal, raisedAmount: campaign.currentMoney))
-                            ),
-                          ),
-                        );
-                      },
-                      child: Text('View Raised Amount'),
-                    ),
-                  )
-                ]
-              )
-              
+                ),
+              ),
             ],
           );
         },
