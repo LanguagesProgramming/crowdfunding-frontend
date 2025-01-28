@@ -30,21 +30,24 @@ class MyApp extends StatelessWidget {
               Icon(Icons.person),
             ],
           ),
-          bottomNavigationBar: const TabBar(tabs: [
-            Tab(icon: Icon(Icons.home), text: 'Home'),
-            Tab(
-              icon: Icon(Icons.campaign),
-              text: 'Campaigns',
-            ),
-            Tab(
-              icon: Icon(Icons.history),
-              text: 'History',
-            ),
-            Tab(
-              icon: Icon(Icons.person),
-              text: 'Profile',
-            )
-          ]),
+          bottomNavigationBar: const TabBar(
+              labelColor: Color(0xFFC1E965),
+              indicatorColor: Color(0xFFC1E965),
+              tabs: [
+                Tab(icon: Icon(Icons.home), text: 'Home'),
+                Tab(
+                  icon: Icon(Icons.campaign),
+                  text: 'Campaigns',
+                ),
+                Tab(
+                  icon: Icon(Icons.history),
+                  text: 'History',
+                ),
+                Tab(
+                  icon: Icon(Icons.person),
+                  text: 'Profile',
+                )
+              ]),
         ),
       ),
     );

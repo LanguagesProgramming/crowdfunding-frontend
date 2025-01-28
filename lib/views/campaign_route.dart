@@ -1,9 +1,13 @@
 import 'package:crowdfunding_frontend/components/app_bar.dart';
+import 'package:crowdfunding_frontend/components/product.dart';
 import 'package:crowdfunding_frontend/controllers/campaign_view_model.dart';
 import 'package:crowdfunding_frontend/controllers/summary_view_model.dart';
+import 'package:crowdfunding_frontend/model/local/campaign.dart';
 import 'package:crowdfunding_frontend/model/schema/campaigns.dart';
+import 'package:crowdfunding_frontend/model/schema/products.dart';
 import 'package:crowdfunding_frontend/model/summary_model.dart';
 import 'package:crowdfunding_frontend/views/donate.dart';
+import 'package:crowdfunding_frontend/views/edit_campaign.dart';
 import 'package:crowdfunding_frontend/views/summary.dart';
 import 'package:flutter/material.dart';
 
@@ -20,6 +24,7 @@ class CampaignRoute extends StatelessWidget {
         listenable: campaignViewModel,
         builder: (context, child) {
           Campaign campaign = campaignViewModel.campaign;
+          Product product = campaignViewModel.getProductFromCampaign();
 
           return Column(
             children: [
@@ -106,6 +111,18 @@ class CampaignRoute extends StatelessWidget {
                   ],
                 ),
               ),
+              FractionallySizedBox(
+                widthFactor: 0.8,
+                child: ProductComponent(
+                  productUrl: product.imageUrl,
+                  productName: product.name,
+                  price: product.price,
+                  onTap: () {
+                    // redirect to buy product
+                    // TODO: @erillope
+                  },
+                ),
+              ),
               Expanded(child: SizedBox()),
               if (campaignViewModel.isEditable()) ...[
                 Container(
@@ -119,11 +136,9 @@ class CampaignRoute extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DonateView(
-                            campaignTitle:
-                                campaign.title, // Pasamos datos relevantes
-                            campaignId: campaign
-                                .campaignId, // Si tienes un ID de la campaña
+                          builder: (context) => EditCampaign(
+                            campaignModel: CampaignModelLocal(),
+                            campaign: campaign,
                           ),
                         ),
                       );
