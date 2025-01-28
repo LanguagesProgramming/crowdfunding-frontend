@@ -5,6 +5,7 @@ import 'package:crowdfunding_frontend/model/local/campaign.dart';
 import 'package:crowdfunding_frontend/model/local/product.dart';
 import 'package:crowdfunding_frontend/model/schema/campaigns.dart';
 import 'package:crowdfunding_frontend/views/campaign_route.dart';
+import 'package:crowdfunding_frontend/views/create_campaign.dart';
 import 'package:flutter/material.dart';
 
 class CampaignsView extends StatelessWidget {
@@ -71,19 +72,15 @@ class CampaignsView extends StatelessWidget {
           color: Color(0xFFC1E965),
           child: GestureDetector(
             onTap: () {
-              /*
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DonateView(
-                          campaignTitle:
-                              campaign.title, // Pasamos datos relevantes
-                          campaignId: campaign
-                              .campaignId, // Si tienes un ID de la campaña
-                        ),
-                      ),
-                    );
-                    */
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CreateCampaign(
+                    campaignModel: CampaignModelLocal(),
+                    productModel: ProductModelLocal(),
+                  ),
+                ),
+              );
             },
             child: Text(
               'Create Campaign',
