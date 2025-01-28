@@ -10,9 +10,7 @@ import 'package:flutter/material.dart';
 class CampaignRoute extends StatelessWidget {
   CampaignViewModel campaignViewModel;
 
-  CampaignRoute({super.key, required this.campaignViewModel}) {
-    print("re run");
-  }
+  CampaignRoute({super.key, required this.campaignViewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -109,32 +107,65 @@ class CampaignRoute extends StatelessWidget {
                 ),
               ),
               Expanded(child: SizedBox()),
-              Container(
-                padding:
-                    EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
-                margin:
-                    EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
-                color: Color(0xFFC1E965),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DonateView(
-                          campaignTitle:
-                              campaign.title, // Pasamos datos relevantes
-                          campaignId: campaign
-                              .campaignId, // Si tienes un ID de la campaña
+              if (campaignViewModel.isEditable()) ...[
+                Container(
+                  padding:
+                      EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+                  margin:
+                      EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
+                  color: Color(0xFFDD0000),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DonateView(
+                            campaignTitle:
+                                campaign.title, // Pasamos datos relevantes
+                            campaignId: campaign
+                                .campaignId, // Si tienes un ID de la campaña
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'Donate Now',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      );
+                    },
+                    child: Text(
+                      'Edit',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
                   ),
                 ),
-              ),
+              ] else ...[
+                Container(
+                  padding:
+                      EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+                  margin:
+                      EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
+                  color: Color(0xFFC1E965),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DonateView(
+                            campaignTitle:
+                                campaign.title, // Pasamos datos relevantes
+                            campaignId: campaign
+                                .campaignId, // Si tienes un ID de la campaña
+                          ),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Donate Now',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ]
             ],
           );
         },
