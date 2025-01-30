@@ -17,6 +17,7 @@ class HomeViewModel extends ChangeNotifier {
   HomeViewModel(this.model);
 
   Future<void> init() async {
+    campaigns.clear();
     try {
       List<Campaign> fetchedCampaings = await model.getAll();
       campaigns.addAll(fetchedCampaings);

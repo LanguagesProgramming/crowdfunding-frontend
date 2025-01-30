@@ -7,7 +7,9 @@ class DonateView extends StatelessWidget {
   final DonationController donationController =
       DonationController(DonationModel());
 
-  DonateView({super.key, required String campaignTitle, required campaignId});
+  DonateView({super.key, required String campaignTitle, required campaignId}) {
+    donationController.campaignId = campaignId;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +45,9 @@ class DonateView extends StatelessWidget {
             ),
             SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () {
-                donationController.submitDonation(context);
+              onPressed: () async {
+                await donationController.submitDonation(context);
+                Navigator.pop(context, "ready");
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFC1E965),

@@ -3,7 +3,6 @@ import 'package:crowdfunding_frontend/components/product.dart';
 import 'package:crowdfunding_frontend/controllers/campaign_view_model.dart';
 import 'package:crowdfunding_frontend/controllers/summary_view_model.dart';
 import 'package:crowdfunding_frontend/model/db/campaign.dart';
-import 'package:crowdfunding_frontend/model/local/campaign.dart';
 import 'package:crowdfunding_frontend/model/schema/campaigns.dart';
 import 'package:crowdfunding_frontend/model/schema/products.dart';
 import 'package:crowdfunding_frontend/model/summary_model.dart';
@@ -12,13 +11,28 @@ import 'package:crowdfunding_frontend/views/edit_campaign.dart';
 import 'package:crowdfunding_frontend/views/summary.dart';
 import 'package:flutter/material.dart';
 
-class CampaignRoute extends StatelessWidget {
-  CampaignViewModel campaignViewModel;
+class CampaignRoute extends StatefulWidget {
+  final CampaignViewModel campaignViewModel;
 
   CampaignRoute({super.key, required this.campaignViewModel});
 
   @override
+  _CampaignRouteState createState() => _CampaignRouteState();
+}
+
+class _CampaignRouteState extends State<CampaignRoute> {
+  late CampaignViewModel campaignViewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    campaignViewModel = widget.campaignViewModel;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: MainAppBar(),
       body: ListenableBuilder(
@@ -143,7 +157,9 @@ class CampaignRoute extends StatelessWidget {
                           ),
                         ),
                       );
-                      await campaignViewModel.update();
+                      setState(() {
+                        campaignViewModel.update();
+                      });
                     },
                     child: Text(
                       'Edit',
@@ -162,8 +178,8 @@ class CampaignRoute extends StatelessWidget {
                       EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
                   color: Color(0xFFC1E965),
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
+                    onTap: () async {
+                      await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => DonateView(
@@ -174,6 +190,10 @@ class CampaignRoute extends StatelessWidget {
                           ),
                         ),
                       );
+
+                      setState(() {
+                        campaignViewModel.update();
+                      });
                     },
                     child: Text(
                       'Donate Now',

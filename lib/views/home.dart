@@ -8,10 +8,20 @@ import 'package:crowdfunding_frontend/model/schema/campaigns.dart';
 import 'package:crowdfunding_frontend/views/campaign_route.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
-  HomeViewModel homeViewModel = HomeViewModel(CampaignModelDB());
+class Home extends StatefulWidget {
+  const Home({super.key});
 
-  Home({super.key}) {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  late HomeViewModel homeViewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    homeViewModel = HomeViewModel(CampaignModelDB());
     homeViewModel.init();
   }
 
@@ -89,8 +99,8 @@ class Home extends StatelessWidget {
                           return Padding(
                             padding: EdgeInsets.only(top: 10, bottom: 10),
                             child: CampaignComponent(
-                              onTap: () {
-                                Navigator.push(
+                              onTap: () async {
+                                await Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => CampaignRoute(
@@ -102,6 +112,9 @@ class Home extends StatelessWidget {
                                     ),
                                   ),
                                 );
+                                setState(() {
+                                  homeViewModel.init();
+                                });
                               },
                               campaignId: currentCampaign.campaignId,
                               userId: currentCampaign.userId,

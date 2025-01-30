@@ -11,6 +11,7 @@ class CampaignsViewModel extends ChangeNotifier {
   List<Campaign> campaigns = [];
 
   Future<void> init() async {
+    campaigns.clear();
     try {
       List<Campaign> fetchedCampaings = await campaignModel.getAll();
 
