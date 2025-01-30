@@ -25,6 +25,7 @@ class TransactionComponent extends StatelessWidget {
       child: Row(
         children: [
           Image(
+            height: 75,
             image: NetworkImage(
               imageUrl,
             ),
@@ -47,4 +48,3 @@ class TransactionComponent extends StatelessWidget {
     );
   }
 }
-

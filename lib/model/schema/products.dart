@@ -15,7 +15,7 @@ class Product {
       required this.discount});
 
   factory Product.fromJson(Map<String, dynamic> json) {
-    String domain = 'https://mysite-4ln3.onrender.com';
+    String domain = 'https://mysite-f0j9.onrender.com';
     String finalImageLink = domain + '/' + json['images'][0];
 
     if (json.containsKey('product_id') &&
