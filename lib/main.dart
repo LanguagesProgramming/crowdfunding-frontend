@@ -6,12 +6,13 @@ import 'package:crowdfunding_frontend/views/home.dart';
 import 'package:crowdfunding_frontend/views/history.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 void main() async {
   await dotenv.load(fileName: '.env');
 
   UserManager().setUser(await UserModelDB().getUser('hola@gmail.com'));
-  runApp(const MyApp());
+  runApp(Phoenix(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

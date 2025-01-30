@@ -5,6 +5,7 @@ import 'package:crowdfunding_frontend/model/campaign_model.dart';
 import 'package:crowdfunding_frontend/model/product_model.dart';
 import 'package:crowdfunding_frontend/views/create_product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class CreateCampaign extends StatefulWidget {
   CampaignModel campaignModel;
@@ -247,6 +248,7 @@ class _CreateCampaignState extends State<CreateCampaign> {
                   onTap: () async {
                     await createCampaignViewModel.createCampaign();
                     Navigator.pop(context, "update");
+                    Phoenix.rebirth(context);
                   },
                   child: Text(
                     'Done',

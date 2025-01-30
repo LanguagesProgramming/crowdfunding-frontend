@@ -12,6 +12,7 @@ import 'package:crowdfunding_frontend/views/donate.dart';
 import 'package:crowdfunding_frontend/views/edit_campaign.dart';
 import 'package:crowdfunding_frontend/views/summary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class CampaignRoute extends StatefulWidget {
   final CampaignViewModel campaignViewModel;
@@ -137,6 +138,7 @@ class _CampaignRouteState extends State<CampaignRoute> {
                           BuyView(campaign: campaignViewModel.campaign),
                     ),
                   );
+                  Phoenix.rebirth(context);
                 },
                 child: FractionallySizedBox(
                   widthFactor: 0.8,
@@ -167,9 +169,7 @@ class _CampaignRouteState extends State<CampaignRoute> {
                           ),
                         ),
                       );
-                      setState(() {
-                        campaignViewModel.update();
-                      });
+                      Phoenix.rebirth(context);
                     },
                     child: Text(
                       'Edit',
@@ -201,9 +201,7 @@ class _CampaignRouteState extends State<CampaignRoute> {
                         ),
                       );
 
-                      setState(() {
-                        campaignViewModel.update();
-                      });
+                      Phoenix.rebirth(context);
                     },
                     child: Text(
                       'Donate Now',
