@@ -11,10 +11,23 @@ import 'package:crowdfunding_frontend/views/edit_campaign.dart';
 import 'package:crowdfunding_frontend/views/summary.dart';
 import 'package:flutter/material.dart';
 
-class CampaignRoute extends StatelessWidget {
-  CampaignViewModel campaignViewModel;
+class CampaignRoute extends StatefulWidget {
+  final CampaignViewModel campaignViewModel;
 
   CampaignRoute({super.key, required this.campaignViewModel});
+
+  @override
+  _CampaignRouteState createState() => _CampaignRouteState();
+}
+
+class _CampaignRouteState extends State<CampaignRoute> {
+  late CampaignViewModel campaignViewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    campaignViewModel = widget.campaignViewModel;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +157,9 @@ class CampaignRoute extends StatelessWidget {
                           ),
                         ),
                       );
-                      await campaignViewModel.update();
+                      setState(() {
+                        campaignViewModel.update();
+                      });
                     },
                     child: Text(
                       'Edit',
@@ -176,7 +191,9 @@ class CampaignRoute extends StatelessWidget {
                         ),
                       );
 
-                      await campaignViewModel.update();
+                      setState(() {
+                        campaignViewModel.update();
+                      });
                     },
                     child: Text(
                       'Donate Now',

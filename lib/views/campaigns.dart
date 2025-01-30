@@ -8,10 +8,20 @@ import 'package:crowdfunding_frontend/views/campaign_route.dart';
 import 'package:crowdfunding_frontend/views/create_campaign.dart';
 import 'package:flutter/material.dart';
 
-class CampaignsView extends StatelessWidget {
-  CampaignsViewModel campaignsViewModel = CampaignsViewModel(CampaignModelDB());
+class CampaignsView extends StatefulWidget {
+  CampaignsView({super.key});
 
-  CampaignsView({super.key}) {
+  @override
+  _CampaignsViewState createState() => _CampaignsViewState();
+}
+
+class _CampaignsViewState extends State<CampaignsView> {
+  late CampaignsViewModel campaignsViewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    campaignsViewModel = CampaignsViewModel(CampaignModelDB());
     campaignsViewModel.init();
   }
 
@@ -78,7 +88,9 @@ class CampaignsView extends StatelessWidget {
                 ),
               );
 
-              campaignsViewModel.init();
+              setState(() {
+                campaignsViewModel.init();
+              });
             },
             child: Text(
               'Create Campaign',
