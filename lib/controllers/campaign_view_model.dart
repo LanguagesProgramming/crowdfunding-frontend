@@ -8,15 +8,15 @@ import 'package:flutter/material.dart';
 class CampaignViewModel extends ChangeNotifier {
   final CampaignModel campaignModel;
   final ProductModel productModel;
-  final Campaign campaign;
+  Campaign campaign;
 
   CampaignViewModel(this.campaignModel, this.productModel, this.campaign);
 
   bool isEditable() {
-    var campaignId = campaign.campaignId;
+    var campaignUserId = campaign.userId;
     var user = UserManager().user;
 
-    if (user != null && campaignId == user.userId) {
+    if (user != null && campaignUserId == user.userId) {
       return true;
     }
 
@@ -25,5 +25,16 @@ class CampaignViewModel extends ChangeNotifier {
 
   Product getProductFromCampaign() {
     return campaign.product;
+  }
+
+  Future<void> update() async {
+    try {
+      Campaign newCampaign = await campaignModel.getById(campaign.campaignId);
+      campaign = newCampaign;
+      notifyListeners();
+    } catch (e) {
+      print("Error updating campaign");
+      print(e);
+    }
   }
 }

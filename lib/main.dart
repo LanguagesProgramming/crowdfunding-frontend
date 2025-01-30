@@ -1,13 +1,16 @@
 import 'package:crowdfunding_frontend/components/app_bar.dart';
-import 'package:crowdfunding_frontend/model/local/user.dart';
+import 'package:crowdfunding_frontend/model/db/user.dart';
 import 'package:crowdfunding_frontend/session.dart';
 import 'package:crowdfunding_frontend/views/campaigns.dart';
 import 'package:crowdfunding_frontend/views/home.dart';
 import 'package:crowdfunding_frontend/views/history.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
-  UserManager().setUser(await UserModelLocal().getUser('1'));
+  await dotenv.load(fileName: '.env');
+
+  UserManager().setUser(await UserModelDB().getUser('hola@gmail.com'));
   runApp(const MyApp());
 }
 

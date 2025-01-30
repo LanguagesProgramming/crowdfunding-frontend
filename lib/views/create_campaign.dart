@@ -24,7 +24,17 @@ class _CreateCampaignState extends State<CreateCampaign> {
   void initState() {
     createCampaignViewModel =
         CreateCampaignViewModel(widget.campaignModel, widget.productModel);
+
+    createCampaignViewModel.goalController
+        .addListener(createCampaignViewModel.readyToCreate);
+
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    createCampaignViewModel.dispose();
   }
 
   @override
@@ -196,28 +206,34 @@ class _CreateCampaignState extends State<CreateCampaign> {
                       ),
                     ],
                   ),
-                  Container(
-                    padding: EdgeInsets.only(
-                        top: 10, bottom: 10, left: 20, right: 20),
-                    margin: EdgeInsets.only(
-                        top: 20, bottom: 20, left: 30, right: 30),
-                    color: Color(0xFFC1E965),
-                    child: GestureDetector(
-                      onTap: () async {
-                        final result = await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CreateProduct(),
+                  ListenableBuilder(
+                      listenable: createCampaignViewModel,
+                      builder: (BuildContext context, Widget? child) {
+                        return Container(
+                          padding: EdgeInsets.only(
+                              top: 10, bottom: 10, left: 20, right: 20),
+                          margin: EdgeInsets.only(
+                              top: 20, bottom: 20, left: 30, right: 30),
+                          color: createCampaignViewModel.productColor,
+                          child: GestureDetector(
+                            onTap: () async {
+                              final result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CreateProduct(),
+                                ),
+                              );
+                              createCampaignViewModel.setProduct(result);
+                              createCampaignViewModel.disableAddProduct();
+                            },
+                            child: Text(
+                              'Add product',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
                           ),
                         );
-                      },
-                      child: Text(
-                        'Add product',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
+                      }),
                 ],
               )),
               Expanded(child: Container()),
@@ -228,8 +244,9 @@ class _CreateCampaignState extends State<CreateCampaign> {
                     EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
                 color: createCampaignViewModel.doneColor,
                 child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
+                  onTap: () async {
+                    await createCampaignViewModel.createCampaign();
+                    Navigator.pop(context, "update");
                   },
                   child: Text(
                     'Done',

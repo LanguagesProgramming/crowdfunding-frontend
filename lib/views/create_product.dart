@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:crowdfunding_frontend/components/app_bar.dart';
+import 'package:crowdfunding_frontend/model/schema/products.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -27,6 +28,35 @@ class _CreateProductState extends State<CreateProduct> {
         imageFile = File(pickedFile.path);
       });
     }
+
+    canCreateProduct();
+  }
+
+  void canCreateProduct() {
+    if (nameController.text != '' &&
+        discountController.text != '' &&
+        priceController != '' &&
+        imageFile != null) {
+      setState(() {
+        doneColor = Color(0xFFC1E965);
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    nameController.addListener(canCreateProduct);
+    discountController.addListener(canCreateProduct);
+    priceController.addListener(canCreateProduct);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    discountController.dispose();
+    priceController.dispose();
+    super.dispose();
   }
 
   @override
@@ -162,7 +192,14 @@ class _CreateProductState extends State<CreateProduct> {
                 color: doneColor,
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pop(
+                        context,
+                        {
+                          'name': nameController.text,
+                          'price': priceController.text,
+                          'discount': discountController.text,
+                          'imageFile': imageFile,
+                        } as Map<String, dynamic>);
                   },
                   child: Text(
                     'Add Product',

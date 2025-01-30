@@ -1,7 +1,7 @@
 import 'package:crowdfunding_frontend/components/campaign.dart';
 import 'package:crowdfunding_frontend/controllers/campaign_view_model.dart';
 import 'package:crowdfunding_frontend/controllers/campaigns_view_model.dart';
-import 'package:crowdfunding_frontend/model/local/campaign.dart';
+import 'package:crowdfunding_frontend/model/db/campaign.dart';
 import 'package:crowdfunding_frontend/model/local/product.dart';
 import 'package:crowdfunding_frontend/model/schema/campaigns.dart';
 import 'package:crowdfunding_frontend/views/campaign_route.dart';
@@ -9,8 +9,7 @@ import 'package:crowdfunding_frontend/views/create_campaign.dart';
 import 'package:flutter/material.dart';
 
 class CampaignsView extends StatelessWidget {
-  CampaignsViewModel campaignsViewModel =
-      CampaignsViewModel(CampaignModelLocal());
+  CampaignsViewModel campaignsViewModel = CampaignsViewModel(CampaignModelDB());
 
   CampaignsView({super.key}) {
     campaignsViewModel.init();
@@ -18,9 +17,6 @@ class CampaignsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
-
     return Column(
       children: [
         Expanded(
@@ -44,7 +40,7 @@ class CampaignsView extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (context) => CampaignRoute(
                                       campaignViewModel: CampaignViewModel(
-                                          CampaignModelLocal(),
+                                          CampaignModelDB(),
                                           ProductModelLocal(),
                                           currentCampaign),
                                     ),
@@ -71,16 +67,18 @@ class CampaignsView extends StatelessWidget {
           margin: EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
           color: Color(0xFFC1E965),
           child: GestureDetector(
-            onTap: () {
-              Navigator.push(
+            onTap: () async {
+              await Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => CreateCampaign(
-                    campaignModel: CampaignModelLocal(),
+                    campaignModel: CampaignModelDB(),
                     productModel: ProductModelLocal(),
                   ),
                 ),
               );
+
+              campaignsViewModel.init();
             },
             child: Text(
               'Create Campaign',

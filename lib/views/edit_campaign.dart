@@ -122,9 +122,9 @@ class _EditCampaignState extends State<EditCampaign> {
               margin: EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
               color: Color(0xFFC1E965),
               child: GestureDetector(
-                onTap: () {
-                  editCampaignViewModel.update();
-                  Navigator.pop(context);
+                onTap: () async {
+                  await editCampaignViewModel.update();
+                  Navigator.pop(context, "updated");
                 },
                 child: Text(
                   'Done',

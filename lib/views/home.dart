@@ -2,14 +2,14 @@ import 'package:crowdfunding_frontend/components/campaign.dart';
 import 'package:crowdfunding_frontend/components/category.dart';
 import 'package:crowdfunding_frontend/controllers/campaign_view_model.dart';
 import 'package:crowdfunding_frontend/controllers/home_view_model.dart';
-import 'package:crowdfunding_frontend/model/local/campaign.dart';
+import 'package:crowdfunding_frontend/model/db/campaign.dart';
 import 'package:crowdfunding_frontend/model/local/product.dart';
 import 'package:crowdfunding_frontend/model/schema/campaigns.dart';
 import 'package:crowdfunding_frontend/views/campaign_route.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
-  HomeViewModel homeViewModel = HomeViewModel(CampaignModelLocal());
+  HomeViewModel homeViewModel = HomeViewModel(CampaignModelDB());
 
   Home({super.key}) {
     homeViewModel.init();
@@ -95,7 +95,7 @@ class Home extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (context) => CampaignRoute(
                                       campaignViewModel: CampaignViewModel(
-                                        CampaignModelLocal(),
+                                        CampaignModelDB(),
                                         ProductModelLocal(),
                                         currentCampaign,
                                       ),

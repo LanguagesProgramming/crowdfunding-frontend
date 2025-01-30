@@ -21,7 +21,9 @@ class HomeViewModel extends ChangeNotifier {
       List<Campaign> fetchedCampaings = await model.getAll();
       campaigns.addAll(fetchedCampaings);
       notifyListeners();
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
   void selectCategory(int index) {

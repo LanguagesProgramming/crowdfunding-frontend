@@ -1,6 +1,8 @@
 import 'package:crowdfunding_frontend/components/category.dart';
 import 'package:crowdfunding_frontend/model/campaign_model.dart';
 import 'package:crowdfunding_frontend/model/schema/campaigns.dart';
+import 'package:crowdfunding_frontend/model/schema/user.dart';
+import 'package:crowdfunding_frontend/session.dart';
 import 'package:flutter/material.dart';
 
 class EditCampaignViewModel extends ChangeNotifier {
@@ -23,6 +25,7 @@ class EditCampaignViewModel extends ChangeNotifier {
       }
     }
     categories[index].isSelected = !categories[index].isSelected;
+    category = categories[index].label;
     notifyListeners();
   }
 
@@ -35,6 +38,8 @@ class EditCampaignViewModel extends ChangeNotifier {
         category.isSelected = true;
       }
     }
+
+    category = campaign.category;
   }
 
   void dispose() {
@@ -42,5 +47,13 @@ class EditCampaignViewModel extends ChangeNotifier {
     descriptionController.dispose();
   }
 
-  void update() {}
+  Future<void> update() async {
+    User? user = UserManager().user;
+    String userId;
+
+    bool res = await campaignModel.updateCampaign(campaign.campaignId,
+        titleController.text, category, descriptionController.text);
+
+    print(res);
+  }
 }

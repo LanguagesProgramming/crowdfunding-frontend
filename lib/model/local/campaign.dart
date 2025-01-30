@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:crowdfunding_frontend/model/campaign_model.dart';
 import 'package:crowdfunding_frontend/model/schema/campaigns.dart';
 import 'package:crowdfunding_frontend/model/schema/products.dart';
@@ -60,5 +62,28 @@ class CampaignModelLocal extends CampaignModel {
       }
     }
     throw ("Not found");
+  }
+
+  @override
+  Future<bool> updateCampaign(String campaignId, String? newTitle,
+      String? newCategory, String? newDescription) {
+    // TODO: implement updateCampaign
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> createCampaign(
+      String userId,
+      String title,
+      String category,
+      String description,
+      double goal,
+      File image,
+      String productName,
+      double productPrice,
+      double productDiscount,
+      File prodImage) {
+    // TODO: implement createCampaign
+    throw UnimplementedError();
   }
 }

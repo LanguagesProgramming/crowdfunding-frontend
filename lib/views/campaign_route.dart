@@ -2,6 +2,7 @@ import 'package:crowdfunding_frontend/components/app_bar.dart';
 import 'package:crowdfunding_frontend/components/product.dart';
 import 'package:crowdfunding_frontend/controllers/campaign_view_model.dart';
 import 'package:crowdfunding_frontend/controllers/summary_view_model.dart';
+import 'package:crowdfunding_frontend/model/db/campaign.dart';
 import 'package:crowdfunding_frontend/model/local/campaign.dart';
 import 'package:crowdfunding_frontend/model/schema/campaigns.dart';
 import 'package:crowdfunding_frontend/model/schema/products.dart';
@@ -132,16 +133,17 @@ class CampaignRoute extends StatelessWidget {
                       EdgeInsets.only(top: 20, bottom: 20, left: 30, right: 30),
                   color: Color(0xFFDD0000),
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
+                    onTap: () async {
+                      await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => EditCampaign(
-                            campaignModel: CampaignModelLocal(),
+                            campaignModel: CampaignModelDB(),
                             campaign: campaign,
                           ),
                         ),
                       );
+                      await campaignViewModel.update();
                     },
                     child: Text(
                       'Edit',

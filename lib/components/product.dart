@@ -18,7 +18,10 @@ class ProductComponent extends StatelessWidget {
       color: Color(0xFFC1E965),
       child: Row(
         children: [
-          Image(image: NetworkImage(productUrl)),
+          Image(
+            image: NetworkImage(productUrl),
+            height: 100,
+          ),
           SizedBox(
             width: 15,
           ),
