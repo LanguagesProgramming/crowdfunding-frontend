@@ -17,7 +17,7 @@ class Transaction {
     return Transaction(
         product: Product.fromJson(json['product']),
         userId: json['user_id'],
-        value: json['value'],
-        units: json['units']);
+        value: json['price'],
+        units: json['stock']);
   }
 }
