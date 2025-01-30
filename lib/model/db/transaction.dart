@@ -26,4 +26,23 @@ class TransactionModelDB extends TransactionModel {
     }
     return transactions;
   }
+
+  @override
+  Future<bool> buy(String campaignId, String userId, double stock) async {
+    String url = Const.url;
+
+    dynamic body = jsonEncode({
+      'campaign_id': campaignId,
+      'user_id': userId,
+      'stock': stock,
+    });
+
+    final response = await http.post(Uri.parse('$url/buy'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: body);
+
+    return response.statusCode == 200;
+  }
 }

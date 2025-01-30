@@ -12,6 +12,8 @@ class HistoryViewModel extends ChangeNotifier {
   HistoryViewModel(this.model);
 
   Future<void> init() async {
+    transactions.clear();
+
     User? user = UserManager().user;
     String userId = '';
 

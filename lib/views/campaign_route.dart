@@ -1,11 +1,13 @@
 import 'package:crowdfunding_frontend/components/app_bar.dart';
 import 'package:crowdfunding_frontend/components/product.dart';
+import 'package:crowdfunding_frontend/controllers/buy_view_model.dart';
 import 'package:crowdfunding_frontend/controllers/campaign_view_model.dart';
 import 'package:crowdfunding_frontend/controllers/summary_view_model.dart';
 import 'package:crowdfunding_frontend/model/db/campaign.dart';
 import 'package:crowdfunding_frontend/model/schema/campaigns.dart';
 import 'package:crowdfunding_frontend/model/schema/products.dart';
 import 'package:crowdfunding_frontend/model/summary_model.dart';
+import 'package:crowdfunding_frontend/views/buy.dart';
 import 'package:crowdfunding_frontend/views/donate.dart';
 import 'package:crowdfunding_frontend/views/edit_campaign.dart';
 import 'package:crowdfunding_frontend/views/summary.dart';
@@ -126,16 +128,24 @@ class _CampaignRouteState extends State<CampaignRoute> {
                   ],
                 ),
               ),
-              FractionallySizedBox(
-                widthFactor: 0.8,
-                child: ProductComponent(
-                  productUrl: product.imageUrl,
-                  productName: product.name,
-                  price: product.price,
-                  onTap: () {
-                    // redirect to buy product
-                    // TODO: @erillope
-                  },
+              GestureDetector(
+                onTap: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          BuyView(campaign: campaignViewModel.campaign),
+                    ),
+                  );
+                },
+                child: FractionallySizedBox(
+                  widthFactor: 0.8,
+                  child: ProductComponent(
+                    productUrl: product.imageUrl,
+                    productName: product.name,
+                    price: product.price,
+                    onTap: () {},
+                  ),
                 ),
               ),
               Expanded(child: SizedBox()),
