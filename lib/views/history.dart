@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:crowdfunding_frontend/controllers/history_view_model.dart';
-import 'package:crowdfunding_frontend/model/local/transaction.dart';
+import 'package:crowdfunding_frontend/model/db/transaction.dart';
 import 'package:crowdfunding_frontend/model/schema/transaction.dart';
 import 'package:crowdfunding_frontend/components/transaction.dart';
 
 class History extends StatelessWidget {
-  HistoryViewModel historyViewModel = HistoryViewModel(TransactionModelLocal());
+  HistoryViewModel historyViewModel = HistoryViewModel(TransactionModelDB());
 
   History({super.key}) {
     historyViewModel.init();

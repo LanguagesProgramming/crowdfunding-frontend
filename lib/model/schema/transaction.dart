@@ -12,4 +12,12 @@ class Transaction {
       required this.user,
       required this.value,
       required this.units});
+
+  factory Transaction.fromJson(Map<String, dynamic> json) {
+    return Transaction(
+        product: Product.fromJson(json['product']),
+        user: User.fromJson(json['user']),
+        value: json['value'],
+        units: json['units']);
+  }    
 }
