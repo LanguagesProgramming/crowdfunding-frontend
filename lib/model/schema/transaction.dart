@@ -1,4 +1,5 @@
 import 'package:crowdfunding_frontend/model/schema/products.dart';
+import 'package:crowdfunding_frontend/model/schema/user.dart';
 
 class Transaction {
   Product product;
@@ -13,17 +14,10 @@ class Transaction {
       required this.units});
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
-    if (json.containsKey('product') &&
-        json.containsKey('user_id') &&
-        json.containsKey('stock') &&
-        json.containsKey('price')) {
-      return Transaction(
-          product: Product.fromJson(json['product']),
-          userId: json['user_id'],
-          units: json['stock'],
-          value: json['price']);
-    } else {
-      throw const FormatException("Failed to load Campaign");
-    }
+    return Transaction(
+        product: Product.fromJson(json['product']),
+        userId: json['user_id'],
+        value: json['value'],
+        units: json['units']);
   }
 }

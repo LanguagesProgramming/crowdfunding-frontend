@@ -24,7 +24,6 @@ class TransactionModelDB extends TransactionModel {
         transactions.add(finalTransaction);
       }
     }
-
     return transactions;
   }
 }
